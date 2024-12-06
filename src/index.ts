@@ -38,20 +38,19 @@ const tools = {
 const server = new Server(
   {
     name: "mcp-server-birdstats",
-    capabilities: {
-      system_prompt: true,
-      birdweather_api: true,
-      ebird_api: true,
-      tools: true
-    },
     version: "0.1.0",
     author: "David Montgomery <https://github.com/DMontgomery40>"
   },
-  {
-    capabilities: { system_prompt: true, birdweather_api: true, ebird_api: true }
+  { 
+    capabilities: {
+      experimental: {},
+      logging: {},
+      prompts: {},
+      resources: {},
+      tools: {}
+    }
   }
 );
-
 function getSystemPrompt(): string {
   const path = join(__dirname, "../system_prompt.md");
   return readFileSync(path, "utf8");

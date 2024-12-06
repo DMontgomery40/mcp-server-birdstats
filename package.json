@@ -26,6 +26,6 @@
   "devDependencies": {
     "shx": "^0.3.4",
     "typescript": "^5.6.2",
-    "@node/types": "^0.1.1"
+    "@types/node": "^0.1.1"
   }
 }

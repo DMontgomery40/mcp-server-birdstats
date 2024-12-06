@@ -8,7 +8,8 @@
     "outDir": "dist",
     "sourceMap": true,
     "declaration": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*.ts"
@@ -16,9 +17,5 @@
   "exclude": [
     "node_modules",
     "dist"
-  ],
-  "scripts": {
-    "clean": "rm -rf dist",
-    "build": "npm run clean && tsc && shx chmod +x dist/*.js"
-  }
+  ]
 }

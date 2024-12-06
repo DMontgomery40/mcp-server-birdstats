@@ -4,6 +4,34 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { CallToolRequestSchema, ListToolsRequestSchema, ListPromptsRequestSchema, GetPromptRequestSchema, McpError, ErrorCode } from "@modelcontextprotocol/sdk/types.js";
 import { readFileSync } from "fs";
 import { join } from "path";
+// Define tools and prompts before using them in the server configuration
+// Define tools with their handlers in the same file
+const tools = {
+    get_system_prompt: {
+        description: "Return the content of system_prompt.md as a string.",
+        inputSchema: { type: "object" }, // Define schema directly here
+        handler: () => {
+            const path = join(__dirname, "system_prompt.md");
+            return readFileSync(path, "utf8");
+        }
+    },
+    get_birdweather_api: {
+        description: "Return the BirdWeather OpenAPI JSON as parsed JSON.",
+        inputSchema: { type: "object" }, // Define schema directly here
+        handler: () => {
+            const path = join(__dirname, "birdweather_api.json");
+            return JSON.parse(readFileSync(path, "utf8"));
+        }
+    },
+    get_ebird_api: {
+        description: "Return the eBird OpenAPI JSON as parsed JSON.",
+        inputSchema: { type: "object" }, // Define schema directly here
+        handler: () => {
+            const path = join(__dirname, "ebird_api.json");
+            return JSON.parse(readFileSync(path, "utf8"));
+        }
+    }
+};
 // Core prompt definition that forces proper API usage and data integrity
 const PROMPTS = {
     "check-bird": {
@@ -23,66 +51,14 @@ const PROMPTS = {
         ]
     }
 };
-// Define tools that force proper API usage
-const tools = {
-    get_birdweather_api: {
-        description: "Return the BirdWeather OpenAPI JSON as parsed JSON.",
-        inputSchema: {
-            type: "object",
-            properties: {
-                query: {
-                    type: "string",
-                    required: true
-                }
-            }
-        },
-        handler: () => {
-            const path = join(__dirname, "birdweather_api.json");
-            return JSON.parse(readFileSync(path, "utf8"));
-        }
-    },
-    get_ebird_api: {
-        description: "Return the eBird OpenAPI JSON as parsed JSON.",
-        inputSchema: {
-            type: "object",
-            properties: {
-                query: {
-                    type: "string",
-                    required: true
-                }
-            }
-        },
-        handler: () => {
-            const path = join(__dirname, "ebird_api.json");
-            return JSON.parse(readFileSync(path, "utf8"));
-        }
-    },
-    get_system_prompt: {
-        description: "Return the system prompt with data integrity rules.",
-        inputSchema: {
-            type: "object",
-            properties: {
-                query: {
-                    type: "string",
-                    required: true
-                }
-            }
-        },
-        handler: () => {
-            const path = join(__dirname, "system_prompt.md");
-            return readFileSync(path, "utf8");
-        }
-    }
-};
 // Initialize the server with required capabilities
 const server = new Server({
     name: "mcp-server-birdstats",
     version: "0.1.0"
 }, {
     capabilities: {
-        tools: {},
-        resources: {},
-        prompts: {}
+        tools: tools,
+        prompts: PROMPTS
     }
 });
 // Set up tool handlers

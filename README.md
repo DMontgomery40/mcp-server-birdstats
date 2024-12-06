@@ -7,5 +7,8 @@ MCP server that provides BirdWeather and BirdNET-Pi and eBird data through natur
 - Provides `system_prompt.md` that the LLM can load as a system message.
 
 ## Installation
-```bash
-npx @michaellatman/mcp-get@latest install @mcp-get-community/mpc-server-birdstats  
+```json
+"mcp-server-birdstats" : {
+    "command": "npx",
+    "args": ["-y", "mcp-server-birdstats"]
+}

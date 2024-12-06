@@ -27,6 +27,15 @@ const PROMPTS = {
 const tools = {
     get_birdweather_api: {
         description: "Return the BirdWeather OpenAPI JSON as parsed JSON.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                query: {
+                    type: "string",
+                    required: true
+                }
+            }
+        },
         handler: () => {
             const path = join(__dirname, "birdweather_api.json");
             return JSON.parse(readFileSync(path, "utf8"));
@@ -34,6 +43,15 @@ const tools = {
     },
     get_ebird_api: {
         description: "Return the eBird OpenAPI JSON as parsed JSON.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                query: {
+                    type: "string",
+                    required: true
+                }
+            }
+        },
         handler: () => {
             const path = join(__dirname, "ebird_api.json");
             return JSON.parse(readFileSync(path, "utf8"));
@@ -41,6 +59,15 @@ const tools = {
     },
     get_system_prompt: {
         description: "Return the system prompt with data integrity rules.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                query: {
+                    type: "string",
+                    required: true
+                }
+            }
+        },
         handler: () => {
             const path = join(__dirname, "system_prompt.md");
             return readFileSync(path, "utf8");

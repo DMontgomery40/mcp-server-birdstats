@@ -17,27 +17,32 @@ const __dirname = dirname(__filename);
 
 // Tools have no arguments, so empty schemas
 const GetSystemPromptSchema = z.object({});
-const GetCombinedApiSchema = z.object({});
+const GetBirdWeatherApiSchema = z.object({});
+const GetEbirdApiSchema = z.object({});
 
 const tools = {
   get_system_prompt: {
     description: "Return the content of system_prompt.md as a string.",
     inputSchema: zodToJsonSchema(GetSystemPromptSchema)
   },
-  get_combined_api: {
-    description: "Return the combined OpenAPI JSON as parsed JSON.",
-    inputSchema: zodToJsonSchema(GetCombinedApiSchema)
+  get_birdweather_api: {
+    description: "Return the BirdWeather OpenAPI JSON as parsed JSON.",
+    inputSchema: zodToJsonSchema(GetBirdWeatherApiSchema)
+  },
+  get_ebird_api: {
+    description: "Return the eBird OpenAPI JSON as parsed JSON.",
+    inputSchema: zodToJsonSchema(GetEbirdApiSchema)
   }
 };
 
 const server = new Server(
   {
-    name: "@mcp-get-community/mcp-server-birdstats",
+    name: "mcp-server-birdstats",
     version: "0.1.0",
-    author: "Michael Latman <https://michaellatman.com>"
+    author: "David Montgomery <https://github.com/DMontgomery40>"
   },
   {
-    capabilities: { tools }
+    capabilities: { system_prompt: true, birdweather_api: true, ebird_api: true }
   }
 );
 
@@ -46,8 +51,14 @@ function getSystemPrompt(): string {
   return readFileSync(path, "utf8");
 }
 
-function getCombinedApi(): unknown {
-  const path = join(__dirname, "../combined_api.json");
+function getBirdWeatherApi(): unknown {
+  const path = join(__dirname, "../birdweather_api.json");
+  const data = readFileSync(path, "utf8");
+  return JSON.parse(data);
+}
+
+function getEbirdApi(): unknown {
+  const path = join(__dirname, "../ebird_api.json");
   const data = readFileSync(path, "utf8");
   return JSON.parse(data);
 }
@@ -64,10 +75,16 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
       const content = getSystemPrompt();
       return { content: [{ type: "text", text: content }] };
     }
-    case "get_combined_api": {
+    case "get_birdweather_api": {
       // Validate empty object
-      GetCombinedApiSchema.parse(request.params.arguments);
-      const content = getCombinedApi();
+      GetBirdWeatherApiSchema.parse(request.params.arguments);
+      const content = getBirdWeatherApi();
+      return { content: [{ type: "json", json: content }] };
+    }
+    case "get_ebird_api": {
+      // Validate empty object
+      GetEbirdApiSchema.parse(request.params.arguments);
+      const content = getEbirdApi();
       return { content: [{ type: "json", json: content }] };
     }
     default:

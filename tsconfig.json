@@ -11,10 +11,14 @@
     "skipLibCheck": true
   },
   "include": [
-    "*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "dist"
-  ]
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc && shx chmod +x dist/*.js"
+  }
 }

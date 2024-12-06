@@ -29,6 +29,12 @@ const tools = {
 };
 const server = new Server({
     name: "mcp-server-birdstats",
+    capabilities: {
+        system_prompt: true,
+        birdweather_api: true,
+        ebird_api: true,
+        tools: true
+    },
     version: "0.1.0",
     author: "David Montgomery <https://github.com/DMontgomery40>"
 }, {

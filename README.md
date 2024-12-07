@@ -4,15 +4,13 @@
 
 ## Overview
 
-This MCP plugin allows you to analyze BirdNET-Pi/BirdWeather detections by connecting them with eBird's extensive database. It follows the single-file logic structure similar to mcp-webresearch.
+This MCP plugin allows you to analyze BirdNET-Pi/BirdWeather detections by connecting them with eBird's extensive database. 
 
 ## Features
 
-- Natural language interface for querying bird data
+- Natural language interface for querying birdnet-pi / birdweather, and eBird data
 - Cross-reference BirdWeather detections with eBird observations
-- Analyze detection patterns and highlight unusual birds
-- Data-driven visualizations
-- Strict data integrity (no example/fake data)
+- Data-driven visualizations with React artifacts
 
 ## Installation
 
@@ -25,17 +23,14 @@ git clone https://github.com/yourusername/mcp-server-birdstats.git
 ```bash
 npm install
 ```
-
-3. Build the project:
-```bash
-npm run build
+## Claude Config
+```
+"mcp-birdstats": {
+      "command": "npx",
+      "args": ["-y", "mcp-birdstats"]
+    },
 ```
 
-## Configuration
-
-You'll need to set up the following environment variables:
-- `BIRDWEATHER_API_TOKEN`: Your BirdWeather API token
-- `EBIRD_API_TOKEN`: Your eBird API token
 
 ## Usage
 
@@ -75,48 +70,6 @@ The core functionality is contained in a single text file under `src/index.txt` 
 - Notable sightings
 - Hotspot data
 - Species information
-
-## Development
-
-The project uses TypeScript and follows a modular architecture:
-
-```
-mcp-server-birdstats/
-├── src/
-│   └── index.txt        # Core logic in single file
-├── package.json         # Dependencies and scripts
-├── tsconfig.json        # TypeScript configuration
-└── README.md           # Documentation
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## Privacy & Security
-
-- Station tokens are never exposed
-- Location privacy settings are respected
-- User data is handled securely
-
-## Error Handling
-
-The plugin includes robust error handling:
-- Graceful API failure handling
-- Clear error messages
-- Data validation
-- Parameter verification
-
-## Performance
-
-Performance considerations:
-- Response caching when appropriate
-- Request size limits
-- Pagination for large datasets
 
 ## License
 

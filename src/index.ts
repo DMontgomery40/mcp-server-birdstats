@@ -28,10 +28,11 @@ const tools = {
       try {
         const path = join(ROOT_DIR, "system_prompt.md");
         return readFileSync(path, "utf8");
-      } catch (error) {
+      } catch (err) {
+        const error = err as Error;
         throw new McpError(
           ErrorCode.InternalError,
-          `Failed to read system_prompt.md: ${error.message}`
+          `Failed to read system_prompt.md: ${error?.message || 'Unknown error'}`
         );
       }
     }
@@ -43,10 +44,11 @@ const tools = {
       try {
         const path = join(ROOT_DIR, "birdweather_api.json");
         return JSON.parse(readFileSync(path, "utf8"));
-      } catch (error) {
+      } catch (err) {
+        const error = err as Error;
         throw new McpError(
           ErrorCode.InternalError,
-          `Failed to read birdweather_api.json: ${error.message}`
+          `Failed to read birdweather_api.json: ${error?.message || 'Unknown error'}`
         );
       }
     }
@@ -58,10 +60,11 @@ const tools = {
       try {
         const path = join(ROOT_DIR, "ebird_api.json");
         return JSON.parse(readFileSync(path, "utf8"));
-      } catch (error) {
+      } catch (err) {
+        const error = err as Error;
         throw new McpError(
           ErrorCode.InternalError,
-          `Failed to read ebird_api.json: ${error.message}`
+          `Failed to read ebird_api.json: ${error?.message || 'Unknown error'}`
         );
       }
     }

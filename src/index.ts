@@ -10,7 +10,12 @@ import {
     ErrorCode
 } from "@modelcontextprotocol/sdk/types.js";
 import { readFileSync } from "fs";
-import { join } from "path";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const ROOT_DIR = dirname(__dirname); // Go up one level to the root
 
 // Define tools and prompts before using them in the server configuration
 
@@ -20,24 +25,45 @@ const tools = {
     description: "Return the content of system_prompt.md as a string.",
     inputSchema: { type: "object" }, // Define schema directly here
     handler: (): string => {
-      const path = join(__dirname, "system_prompt.md");
-      return readFileSync(path, "utf8");
+      try {
+        const path = join(ROOT_DIR, "system_prompt.md");
+        return readFileSync(path, "utf8");
+      } catch (error) {
+        throw new McpError(
+          ErrorCode.InternalError,
+          `Failed to read system_prompt.md: ${error.message}`
+        );
+      }
     }
   },
   get_birdweather_api: {
     description: "Return the BirdWeather OpenAPI JSON as parsed JSON.",
     inputSchema: { type: "object" }, // Define schema directly here
     handler: (): unknown => {
-      const path = join(__dirname, "birdweather_api.json");
-      return JSON.parse(readFileSync(path, "utf8"));
+      try {
+        const path = join(ROOT_DIR, "birdweather_api.json");
+        return JSON.parse(readFileSync(path, "utf8"));
+      } catch (error) {
+        throw new McpError(
+          ErrorCode.InternalError,
+          `Failed to read birdweather_api.json: ${error.message}`
+        );
+      }
     }
   },
   get_ebird_api: {
     description: "Return the eBird OpenAPI JSON as parsed JSON.",
     inputSchema: { type: "object" }, // Define schema directly here
     handler: (): unknown => {
-      const path = join(__dirname, "ebird_api.json");
-      return JSON.parse(readFileSync(path, "utf8"));
+      try {
+        const path = join(ROOT_DIR, "ebird_api.json");
+        return JSON.parse(readFileSync(path, "utf8"));
+      } catch (error) {
+        throw new McpError(
+          ErrorCode.InternalError,
+          `Failed to read ebird_api.json: ${error.message}`
+        );
+      }
     }
   }
 };

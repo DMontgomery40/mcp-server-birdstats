@@ -1,0 +1,28 @@
+{
+  "name": "mcp-birdstats",
+  "version": "0.1.0",
+  "description": "This MCP plugin allows you to analyze BirdNET-Pi/BirdWeather detections by connecting them with eBird&#39;s extensive database, all through natural language using MCP.",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "mcp-birdstats": "./build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "0.6.0",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  }
+}

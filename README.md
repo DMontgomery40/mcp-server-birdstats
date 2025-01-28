@@ -1,4 +1,5 @@
 # mcp-server-birdstats
+[![smithery badge](https://smithery.ai/badge/mcp-birdstats)](https://smithery.ai/server/mcp-birdstats)
 
 > Cross-reference your BirdNET-Pi data with eBird observations using natural language
 
@@ -14,6 +15,15 @@ This MCP plugin allows you to analyze BirdNET-Pi/BirdWeather detections by conne
 
 ## Installation
 
+### Installing via Smithery
+
+To install Bird Stats for Claude Desktop automatically via [Smithery](https://smithery.ai/server/mcp-birdstats):
+
+```bash
+npx -y @smithery/cli install mcp-birdstats --client claude
+```
+
+### Manual Installation
 1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/mcp-server-birdstats.git

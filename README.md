@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/dmontgomery40-mcp-server-birdstats-badge.png)](https://mseep.ai/app/dmontgomery40-mcp-server-birdstats)
+
 # mcp-server-birdstats
 
 > Cross-reference your BirdNET-Pi data with eBird observations using natural language

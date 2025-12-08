@@ -21,7 +21,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.0.1",
+    "@modelcontextprotocol/sdk": "1.24.0",
     "@mzxrai/mcp-webresearch": "^0.1.3"
   },
   "devDependencies": {

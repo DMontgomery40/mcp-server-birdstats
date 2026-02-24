@@ -1,0 +1,12 @@
+.git
+.gitignore
+node_modules
+dist
+build
+coverage
+.nyc_output
+npm-debug.log*
+.DS_Store
+.obsidian
+mcp-server-birdstats
+tests

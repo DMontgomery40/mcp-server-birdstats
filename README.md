@@ -111,7 +111,7 @@ MIT
 
 ## Appendix: MCP in Practice (Code Execution, Tool Scale, and Safety)
 
-Last updated: 2026-02-24
+Last updated: 2026-03-23
 
 ### Why This Appendix Exists
 
